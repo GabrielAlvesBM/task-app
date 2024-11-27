@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 import TodoSpinner from './components/TodoSpinner.vue';
 import TodoFormAdd from './components/TodoFormAdd.vue';
 import TodoItems from './components/TodoItems.vue';
@@ -25,6 +27,19 @@ export default {
     TodoFormAdd,
     TodoItems,
     TodoEmpty
+  },
+
+  data() {
+    return {
+      todos: []
+    }
+  },
+
+  created() {
+    axios.get('http://localhost:3000/todos')
+      .then((res) => {
+        this.todos = res.data
+      })
   }
 }
 </script>
