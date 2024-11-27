@@ -29,16 +29,10 @@ export default {
     TodoEmpty
   },
 
-  data() {
-    return {
-      todos: []
-    }
-  },
-
   created() {
     axios.get('http://localhost:3000/todos')
       .then((res) => {
-        this.todos = res.data
+        this.$store.commit('storeTodos', res.data)
       })
   }
 }
