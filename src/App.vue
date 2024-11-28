@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 import TodoSpinner from './components/TodoSpinner.vue';
 import TodoFormAdd from './components/TodoFormAdd.vue';
 import TodoItems from './components/TodoItems.vue';
@@ -39,14 +37,8 @@ export default {
 
   created() {
     this.loading = true
-
-    axios.get('http://localhost:3000/todos')
-      .then((res) => {
-        this.$store.commit('storeTodos', res.data)
-      })
-      .finally(() => {
-        this.loading = false
-      })
+    this.$store.dispatch('getTodos')
+      .finally(() => this.loading = false)
   }
 }
 </script>

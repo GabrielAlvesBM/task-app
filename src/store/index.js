@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import axios from 'axios'
 
 export default createStore({
   state: {
@@ -9,9 +10,15 @@ export default createStore({
       state.todos = payload
     }
   },
-  getters: {
-  },
   actions: {
+    getTodos({ commit }) {
+      return axios.get('http://localhost:3000/todos')
+      .then((res) => {
+        commit('storeTodos', res.data)
+      })
+    }
+  },
+  getters: {
   },
   modules: {
   }
