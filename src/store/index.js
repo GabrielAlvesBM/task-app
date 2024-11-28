@@ -23,10 +23,14 @@ export default createStore({
     },
 
     addTodo(context, data) {
-      axios.post('http://localhost:3000/todos', data)
+      return axios.post('http://localhost:3000/todos', data)
         .then((res) => {
           context.commit('storeTodo', res.data)
         })
+    },
+
+    updateTodo(context, { id, data }) {
+      return axios.put(`http://localhost:3000/todos/${String(id)}`, data)      
     }
   },
   getters: {

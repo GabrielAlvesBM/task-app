@@ -18,6 +18,7 @@
             class="bg-gray-300 placeholder-gray-500 
             text-gray-700 font-light focus:outline-none block w-full appearance-none 
               leading-normal mr-3"
+            @keyup.enter="updateTodo"
         >
       </div>
 
@@ -53,6 +54,26 @@
       todo: {
         type: Object,
         default: () => ({})
+      }
+    },
+
+    methods: {
+      updateTodo(event) {
+        const newTitle = event.target.value
+
+        if (!newTitle) {
+          return
+        }
+
+        const payload = {
+          id: this.todo.id,
+          data: {
+            id: this.todo.id,
+            title: newTitle,
+            completed: this.todo.completed
+          }
+        }
+        this.$store.dispatch('updateTodo', payload)
       }
     }
   }
